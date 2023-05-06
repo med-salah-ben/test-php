@@ -53,11 +53,11 @@
 <tr>
 	<td>Domaine d'activité</td>
 	<td>
-    <input type="checkbox" name="Activité" />
+    <input type="checkbox" name="Activité[]"  value="Informatique">
     <label>Informatique</label>
-    <input type="checkbox" name="Activité" />
+    <input type="checkbox" name="Activité[]" value="Gestion">
     <label>Gestion</label>
-    <input type="checkbox" name="Activité" />
+    <input type="checkbox" name="Activité[]" value="Pédagogie">
     <label>Pédagogie</label>
 </td>
 </tr>
@@ -117,7 +117,7 @@ if (isset($_POST['envoi'])) {
     if (empty($errors)) {
         mysqli_select_db($con, "examen");
         $req = "INSERT INTO etudiant (Nom, Prenom,Email, sexe, Pays , Langages , Activité)
-                VALUES ('$Nom', '$Prenom', '$Email' , $sexe', '$Pays' , '$Langages' , '$Activité')";
+                VALUES ('$Nom', '$Prenom', '$Email' , '$sexe', '$Pays' , '$Langages' , '$Activité')";
         mysqli_query($con, $req);
         echo "Inscription a été effectué avec succès.<br>";
     } else {
