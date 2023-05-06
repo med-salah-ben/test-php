@@ -26,8 +26,8 @@
 </tr>
 <tr>
 <td>Sexe:</td>
-<td><input type="radio" name="sexe"> Masculin 
-	<input type="radio" name="sexe"> Féminin </td>
+<td><input type="radio" value="Masculin" name="sexe"> Masculin 
+	<input type="radio" value="Féminin" name="sexe"> Féminin </td>
 </tr>
 <tr>
 	<td>Pays</td>
@@ -73,7 +73,6 @@
 
 <?php
 $con=new mysqli("localhost", "root","","examen");
-$con = new mysqli("localhost", "root", "", "examen");
 
 if (isset($_POST['envoi'])) {
     $Nom = $_POST['Nom'];
@@ -112,12 +111,19 @@ if (isset($_POST['envoi'])) {
 
     if (empty($Activité)) {
         $errors[] = "Il faut saisir votre Activité.";
+        if(!empty($_POST['Activité'])) {
+    
+            foreach($_POST['Activité'] as $value){
+                $act = $value;
+            }
+    
+        }
     }
 
     if (empty($errors)) {
         mysqli_select_db($con, "examen");
         $req = "INSERT INTO etudiant (Nom, Prenom,Email, sexe, Pays , Langages , Activité)
-                VALUES ('$Nom', '$Prenom', '$Email' , '$sexe', '$Pays' , '$Langages' , '$Activité')";
+                VALUES ('$Nom', '$Prenom', '$Email' , '$sexe', '$Pays' , '$Langages' , '$act')";
         mysqli_query($con, $req);
         echo "Inscription a été effectué avec succès.<br>";
     } else {
